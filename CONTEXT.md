@@ -7,8 +7,8 @@ A strength-training tracker for iPhone and Apple Watch, where the Watch can run 
 ### Training
 
 **Routine**:
-A reusable, named plan of Exercises (and their target Sets) that a Workout can be started from.
-_Avoid_: Template, program, plan
+A reusable, named plan made of ordered Exercise Templates that a Workout can be started from.
+_Avoid_: Program, plan, workout template
 
 **Workout**:
 One performed training session, from start to finish, optionally started from a Routine.
@@ -19,15 +19,35 @@ A named movement, such as Bench Press, that Sets are recorded against.
 _Avoid_: Movement, lift
 
 **Set**:
-One recorded effort within an Exercise in a Workout: weight × reps, or time or distance.
+One recorded effort within a Workout Exercise, holding only the fields its Exercise's Measurement uses, in the unit the user entered.
 _Avoid_: Rep, entry
+
+**Exercise Template**:
+One Exercise as planned inside a Routine: its position, notes and Target Sets.
+_Avoid_: Routine exercise, template (alone)
+
+**Target Set**:
+A planned Set inside an Exercise Template, which becomes an empty Set when a Workout starts.
+_Avoid_: Planned set, goal
+
+**Workout Exercise**:
+One Exercise as performed inside a Workout: its position, notes, optional superset group and Sets.
+_Avoid_: Workout entry, exercise log
+
+**Measurement**:
+What an Exercise records per Set: weight × reps, reps only, weighted or assisted bodyweight, time, distance, or distance × time.
+_Avoid_: Tracking type, metric
+
+**Set Type**:
+Whether a Set is normal, warm-up, drop or failure.
+_Avoid_: Set kind, set tag
 
 **Library Exercise**:
 An Exercise bundled from the open-source exercise library; read-only to users.
 _Avoid_: Built-in exercise, default exercise
 
 **Custom Exercise**:
-An Exercise a user created themselves, private to that user.
+An Exercise the user created or added from the Community, private to that user and stored in their data.
 _Avoid_: User exercise, personal exercise
 
 **Community Exercise**:
@@ -65,6 +85,12 @@ _Avoid_: Review, vote, like
 **Report**:
 One user's flag that a Community Exercise is wrong or inappropriate, for moderation.
 _Avoid_: Flag, complaint, issue
+
+### Import
+
+**Import**:
+One run of bringing a Strong or Hevy export into the app; imported Workouts link to it and keep their original rows as extras.
+_Avoid_: Migration, sync
 
 ### Appearance
 
