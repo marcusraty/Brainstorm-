@@ -34,6 +34,24 @@ _Avoid_: User exercise, personal exercise
 A separate, public copy of a Custom Exercise that its creator has Published, which other users can find, add, Rate and Report.
 _Avoid_: Shared exercise, public exercise
 
+### Workout lifecycle
+
+**Live**:
+The state of a Workout from Start until it is Finished or Discarded; the same Live Workout is present on both iPhone and Watch.
+_Avoid_: Active, running, in progress, started
+
+**Finished**:
+The final state of a Workout that was ended on either device; it is part of history and never becomes Live again.
+_Avoid_: Ended, stopped, completed, saved
+
+**Discard**:
+Throwing away a Live Workout from either device, so that nothing of it is kept.
+_Avoid_: Cancel, delete, abandon
+
+**Workout Connection**:
+Whether the iPhone and Watch can currently exchange a Live Workout's changes: **Connected** or **Disconnected**.
+_Avoid_: Link, sync, mirroring, reachable, paired
+
 ### Community
 
 **Publish**:
