@@ -1,0 +1,18 @@
+# Data model: UUID identity, templates vs performed records, entered units, lossless imports
+
+Every stored record gets a UUID created on the device that makes it, fixed for life and carried everywhere (Watch↔iPhone, iCloud, export); SwiftData's `PersistentIdentifier` never leaves one `ModelContext`, and a record arriving twice is recognised by its UUID. A Routine holds ordered **Exercise Templates**, each with **Target Sets**; starting a Workout copies them into **Workout Exercises** with empty **Sets**, and the Workout keeps only a loose reference to its Routine (UUID plus a copy of the name). Each Exercise has a **Measurement**; a Set is one entity with optional weight, reps, duration and distance, filled per that Measurement, plus a **Set Type** (normal / warm-up / drop / failure) and optional RPE, and Workout Exercises carry an optional superset group. Weights and distances are stored as the number the user entered plus its unit, and duration in seconds, because converting to canonical units drifts and breaks plate maths; conversion happens only for display and totals.
+
+## Considered Options
+
+- **No middle layer** (Sets carry Exercise and order directly): rejected; notes, reordering and supersets get awkward.
+- **Canonical SI units**: rejected; rounding drift on round-trips.
+- **Referencing Community Exercises remotely with a cache**: rejected; the Watch must run offline and Community copies can be hidden after Reports.
+- **Requiring matching iPhone and Watch app versions to exchange anything**: rejected as a blanket rule because App Store updates land on each device separately; replaced by the one-version-skew rule and mismatch flow below.
+
+## Consequences
+
+- **Exercise references** are either `library(id)` or `custom(uuid)`, always with a copy of the name. Adding a Community Exercise creates a Custom Exercise that keeps its Community ID and a snapshot of the Community version. Editing marks it changed locally (it's the user's own from then on); "Revert to Community version" restores the snapshot; Rating and Reporting are allowed only while unchanged.
+- **Imports:** an Import record (source app, header variant, file name, assumed timezone, time, counts). Imported Workouts link to it; each imported Set keeps its whole original CSV row as JSON extras, so later re-mapping and undo (delete everything linked to the Import) are possible. The file itself isn't kept.
+- **Schema evolution:** each store is versioned (`VersionedSchema` + `SchemaMigrationPlan`). The Watch store is local-only (ADR-0001) and migrates freely each release. The iCloud schema is additive-only (Apple's rule). The iPhone and Watch apps always ship together with the same version; the change messages between devices carry a sync version and must tolerate exactly one version of skew.
+- **Version mismatch (more than one version apart, or a Watch that can't reach the required watchOS):** syncing between the devices stops and changes queue, syncing automatically once updated. Workouts can still start, but on one device only: every Start while mismatched shows a large warning with the update steps (and, on iPhone, a button to the App Store page) and needs an extra "Start on this device only" tap; the other device doesn't join. This is a deliberate, loud exception to Zero-thought Workouts (ADR-0003). A Live Workout is never interrupted; a mismatch found mid-Workout applies after it's Finished. Details and Apple's update steps: `docs/research/watch-app-version-gate.md`.
+- **The Watch app is a companion (dependent) app**: it requires the iPhone app to be installed, not present. A Watch app without the iPhone app would have nowhere to sync (ADR-0002).
