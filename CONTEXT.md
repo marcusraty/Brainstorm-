@@ -22,6 +22,32 @@ _Avoid_: Movement, lift
 One recorded effort within an Exercise in a Workout: weight × reps, or time or distance.
 _Avoid_: Rep, entry
 
+**Library Exercise**:
+An Exercise bundled from the open-source exercise library; read-only to users.
+_Avoid_: Built-in exercise, default exercise
+
+**Custom Exercise**:
+An Exercise a user created themselves, private to that user.
+_Avoid_: User exercise, personal exercise
+
+**Community Exercise**:
+A separate, public copy of a Custom Exercise that its creator has Published, which other users can find, add, Rate and Report.
+_Avoid_: Shared exercise, public exercise
+
+### Community
+
+**Publish**:
+The one-way act of copying a Custom Exercise into a Community Exercise.
+_Avoid_: Share, upload
+
+**Rating**:
+One user's score of a Community Exercise.
+_Avoid_: Review, vote, like
+
+**Report**:
+One user's flag that a Community Exercise is wrong or inappropriate, for moderation.
+_Avoid_: Flag, complaint, issue
+
 ### Appearance
 
 **Style**:
