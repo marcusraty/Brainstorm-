@@ -65,8 +65,12 @@ The final state of a Workout that was ended on either device; it is part of hist
 _Avoid_: Ended, stopped, completed, saved
 
 **Discard**:
-Throwing away a Live Workout from either device, so that nothing of it is kept.
+Throwing away a Live Workout from either device, so that nothing of it is kept; one made while the devices were apart can be overturned in review if the other device ended the Workout differently.
 _Avoid_: Cancel, delete, abandon
+
+**Needs review**:
+The mark on a Workout whose two devices ended it differently while apart, until the user chooses between the two versions on the iPhone.
+_Avoid_: Conflict, merge, sync error
 
 **Workout Connection**:
 Whether the iPhone and Watch can currently exchange a Live Workout's changes: **Connected** or **Disconnected**.
